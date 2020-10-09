@@ -175,16 +175,40 @@ npx ng g m material --flat -m app
 
 (3) append common css to styles.css
 
+### add custom scss stylesheet
+
+1. pick a color palette using the Material Color tool
+2. add lemonemart-theme.scss to project
+3. update angular.json wiht the new them file name:
+   "styles": ["src/lemonmart-theme.scss", "src/styles.css"],
+
+### SVG version of your website logo
+
+create or obtain an SVG version of your website logo from a designer
+or a site like https://www.flaticon.com
+
+(1) generate a favicon.ico and manfest files using a tool such as https://realfavicongenerator.net
+(1a) sample generated for this site: https://realfavicongenerator.net/favicon_result?file_id=p1ek768tocclo82hsoc5vvq826#.X4CdstBKguU
+(2) copy the zip contents to the src folder
+(3) update the index file
+
 ## Commands run during development
 
-npx ng generate component current-weather
-...or... ng g c current-weather
-...prepend npx if necessary...
+generate modules based on roles functionality:
 
+npx ng g m manager -m app --routing
+npx ng g m inventory -m app --routing
+npx ng g m pos -m app --routing
+npx ng g m user -m app --routing
+
+home component
+npx ng g c home -m app --inline-style
+
+page-not-found component
+npx ng g c pageNotFound -m app --inline-template --inline-style
+
+OTHER:
 npx ng g i ICurrentWeather interface
-
 npx ng g s weather --flat false
-
 npx ng g c citySearch -m app --dry-run
-
 npx ng g s postalCode --project=local-weather-app --no-flat --lintFix --dry-run

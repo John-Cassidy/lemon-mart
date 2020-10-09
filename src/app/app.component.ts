@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'lemon-mart';
+  title = 'LemonMart';
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
     iconRegistry.addSvgIcon(

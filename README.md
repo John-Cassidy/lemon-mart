@@ -191,6 +191,7 @@ or a site like https://www.flaticon.com
 (1a) sample generated for this site: https://realfavicongenerator.net/favicon_result?file_id=p1ek768tocclo82hsoc5vvq826#.X4CdstBKguU
 (2) copy the zip contents to the src folder
 (3) update the index file
+(4) update angular.json to include the files you added to the project
 
 ## Commands run during development
 
@@ -207,7 +208,9 @@ npx ng g c home -m app --inline-style
 page-not-found component
 npx ng g c pageNotFound -m app --inline-template --inline-style
 
-OTHER:
+npx ng g c manager/managerHome -m manager -s
+
+OTHER EXAMPLES
 npx ng g i ICurrentWeather interface
 npx ng g s weather --flat false
 npx ng g c citySearch -m app --dry-run

@@ -41,6 +41,7 @@ Update the tslint.json rules for integration with Prettier and tslint-etc:
 "rules": {
 "prettier": true,
 "no-unused-declaration": true,
+"semicolon": [true, "always"],
 ...
 }
 ...
@@ -164,9 +165,15 @@ NOTE: if the major/minor versions of the following packages don't match, you can
 
 npm install @angular/material@10.2.3 @angular/cdk@10.2.3
 
+npm i @angular/flex-layout
+
 npx ng g m material --flat -m app
 
-npm i @angular/flex-layout
+(1) in material.module.ts, define a const modules array and export MatButtonModule, MatToolbarModuel, and MatIconModule, removing CommonModule
+
+(2) in app.modules.ts, import FlexLayoutModule so Angular Flex Layout can be activated
+
+(3) append common css to styles.css
 
 ## Commands run during development
 

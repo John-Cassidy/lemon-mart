@@ -7,9 +7,17 @@
       "request": "launch",
       "url": "http://localhost:5000/#",
       "webRoot": "${workspaceRoot}",
-      "runtimeArgs": [
-        "--remote-debugging-port=9222"
-      ],
+      "runtimeArgs": ["--remote-debugging-port=9222"],
+      "sourceMaps": true,
+      "preLaunchTask": "npm: start"
+    },
+    {
+      "name": "Debug launch Chrome manual npm run start",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5000/#",
+      "webRoot": "${workspaceRoot}",
+      "runtimeArgs": ["--remote-debugging-port=9222"],
       "sourceMaps": true
     },
     {
@@ -27,9 +35,7 @@
       "request": "launch",
       "url": "http://localhost:9876/debug.html",
       "webRoot": "${workspaceRoot}",
-      "runtimeArgs": [
-        "--remote-debugging-port=9222"
-      ],
+      "runtimeArgs": ["--remote-debugging-port=9222"],
       "sourceMaps": true,
       "preLaunchTask": "npm: test"
     },
@@ -48,21 +54,7 @@
       "request": "launch",
       "program": "${workspaceRoot}/node_modules/protractor/bin/protractor",
       "protocol": "inspector",
-      "args": [
-        "${workspaceRoot}/protractor.conf.js"
-      ]
-    },
-    {
-      "name": "Debug npm start with Chrome",
-      "type": "chrome",
-      "request": "launch",
-      "url": "http://localhost:5000/#",
-      "webRoot": "${workspaceRoot}",
-      "runtimeArgs": [
-        "--remote-debugging-port=9222"
-      ],
-      "sourceMaps": true,
-      "preLaunchTask": "npm: start"
+      "args": ["${workspaceRoot}/protractor.conf.js"]
     }
   ]
 }

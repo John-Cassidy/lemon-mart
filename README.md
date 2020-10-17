@@ -185,10 +185,10 @@ npx ng g m material --flat -m app
 ### SVG version of your website logo
 
 create or obtain an SVG version of your website logo from a designer
-or a site like https://www.flaticon.com
+or a site like <https://www.flaticon.com>
 
-(1) generate a favicon.ico and manfest files using a tool such as https://realfavicongenerator.net
-(1a) sample generated for this site: https://realfavicongenerator.net/favicon_result?file_id=p1ek768tocclo82hsoc5vvq826#.X4CdstBKguU
+(1) generate a favicon.ico and manfest files using a tool such as <https://realfavicongenerator.net>
+(1a) sample generated for this site: <https://realfavicongenerator.net/favicon_result?file_id=p1ek768tocclo82hsoc5vvq826#.X4CdstBKguU>
 (2) copy the zip contents to the src folder
 (3) update the index file
 (4) update angular.json to include the files you added to the project

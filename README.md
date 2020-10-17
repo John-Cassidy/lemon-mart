@@ -136,7 +136,7 @@ npm install --save-dev yargs dotenv
   // import { environment } from 'src/environments/environment';
   import { environment } from '@environment'; // nice!
 
-## Commands
+## Commands style | lint
 
 Run the following commands before committing your code to ensure styles and linting properly applied to the project:
 
@@ -193,7 +193,7 @@ or a site like <https://www.flaticon.com>
 (3) update the index file
 (4) update angular.json to include the files you added to the project
 
-## Commands run during development
+## Commands run during development to create
 
 generate modules based on roles functionality:
 
@@ -210,7 +210,24 @@ npx ng g c pageNotFound -m app --inline-template --inline-style
 
 npx ng g c manager/managerHome -m manager -s
 
-OTHER EXAMPLES
+npx ng g c manager/manager -m manager --flat -s
+npx ng g c manager/userManagement -m manager -s
+npx ng g c manager/receiptLookup -m manager -s
+
+npx ng g c user/profile -m user -s
+npx ng g c user/logout -m user -s
+npx ng g c user/navigationMenu -m user -s
+
+npx ng g c pos/pos -m pos -s
+
+npx ng g c inventory/inventoryHome -m inventory -s
+npx ng g c inventory/inventory -m inventory --flat -s
+npx ng g c inventory/categories -m inventory -s
+npx ng g c inventory/products -m inventory -s
+npx ng g c inventory/stockEntry -m inventory -s
+
+## OTHER EXAMPLES
+
 npx ng g i ICurrentWeather interface
 npx ng g s weather --flat false
 npx ng g c citySearch -m app --dry-run

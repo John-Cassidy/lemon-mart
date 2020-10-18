@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { commonTestingModules } from '../common/common.testing';
 import { InventoryComponent } from './inventory.component';
 
 describe('InventoryComponent', () => {
@@ -8,13 +9,14 @@ describe('InventoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [commonTestingModules],
       declarations: [InventoryComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(InventoryComponent);
-    component = fixture.componentInstance;
+    component = fixture.debugElement.componentInstance;
     fixture.detectChanges();
   });
 

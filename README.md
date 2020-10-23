@@ -226,6 +226,11 @@ npx ng g c inventory/categories -m inventory -s
 npx ng g c inventory/products -m inventory -s
 npx ng g c inventory/stockEntry -m inventory -s
 
+npx ng g enum auth/auth
+npx ng g interface user/user/user
+npx ng g s auth --flat false --lintFix
+npx ng g s auth/inMemoryAuth --lintFix --skipTests
+
 ## OTHER EXAMPLES
 
 npx ng g i ICurrentWeather interface
@@ -233,6 +238,6 @@ npx ng g s weather --flat false
 npx ng g c citySearch -m app --dry-run
 npx ng g s postalCode --project=local-weather-app --no-flat --lintFix --dry-run
 
-# Diagrams
+## Wiki
 
-![Image of LemonMart Entities Diagram](./docs/diagrams/LemonMartED.png)
+The wiki provides resources such as documentation, diagrams, and mockups.

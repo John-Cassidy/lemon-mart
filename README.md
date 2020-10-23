@@ -193,6 +193,12 @@ or a site like <https://www.flaticon.com>
 (3) update the index file
 (4) update angular.json to include the files you added to the project
 
+## Authentication / Authorization / JWT
+
+install the JWT decoding library
+npm i jwt-decode
+npm i -D @types/jwt-decode
+
 ## Commands run during development to create
 
 generate modules based on roles functionality:

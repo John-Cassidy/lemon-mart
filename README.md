@@ -199,6 +199,8 @@ install the JWT decoding library
 npm i jwt-decode
 npm i -D @types/jwt-decode
 
+npm i fake-jwt-sign
+
 ## Commands run during development to create
 
 generate modules based on roles functionality:
@@ -236,6 +238,7 @@ npx ng g enum auth/auth
 npx ng g interface user/user/user
 npx ng g s auth --flat false --lintFix
 npx ng g s auth/inMemoryAuth --lintFix --skipTests
+npx ng g s auth/cache --lintFix --skipTests
 
 ## OTHER EXAMPLES
 

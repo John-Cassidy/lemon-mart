@@ -239,6 +239,7 @@ npx ng g interface user/user/user
 npx ng g s auth --flat false --lintFix
 npx ng g s auth/inMemoryAuth --lintFix --skipTests
 npx ng g s auth/cache --lintFix --skipTests
+npx ng g interceptor auth/authHttp --lintFix --skipTests
 
 ## OTHER EXAMPLES
 

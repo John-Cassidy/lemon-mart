@@ -241,6 +241,8 @@ npx ng g s auth/inMemoryAuth --lintFix --skipTests
 npx ng g s auth/cache --lintFix --skipTests
 npx ng g interceptor auth/authHttp --lintFix --skipTests
 
+npx ng g c login -m app
+
 ## OTHER EXAMPLES
 
 npx ng g i ICurrentWeather interface

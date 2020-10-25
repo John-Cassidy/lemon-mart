@@ -11,11 +11,12 @@ import { AuthHttpInterceptor } from './auth/auth-http.interceptor';
 import { InMemoryAuthService } from './auth/auth.inmemory.service';
 import { AuthService } from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 import { MaterialModule } from './material.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, PageNotFoundComponent],
+  declarations: [AppComponent, HomeComponent, PageNotFoundComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

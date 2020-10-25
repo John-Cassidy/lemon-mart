@@ -7,6 +7,9 @@ export class AppPage {
     >;
   }
 
+  getLoginHeadlineText(text: string): Promise<string> {
+    return element(by.css('app-login div.mat-headline')).getText() as Promise<string>;
+  }
   getTitleText(): Promise<string> {
     return element(by.css('app-root h1')).getText() as Promise<string>;
   }

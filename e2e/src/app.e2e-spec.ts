@@ -17,8 +17,8 @@ describe('workspace-project App', () => {
   // /home
   it('home page should display Login as Manager button', () => {
     page.navigateTo('/home');
-    const text = 'Login as Manager';
-    expect(page.getButtonText(text)).toEqual(text);
+    const text = 'Hello, Lemonite!';
+    expect(page.getLoginHeadlineText(text)).toEqual(text);
   });
 
   // /manager/home

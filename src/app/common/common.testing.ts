@@ -5,8 +5,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SafeResourceUrl, SafeValue } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { autoSpyObj } from 'angular-unit-test-helper';
 import { Observable, Subscription, of } from 'rxjs';
 
+import { AuthService } from '../auth/auth.service';
 import { MaterialModule } from '../material.module';
 
 const FAKE_SVGS = {
@@ -64,7 +66,7 @@ export class DomSanitizerFake {
 
 // tslint:disable-next-line: no-any
 export const commonTestingProviders: any[] = [
-  // Intentionally left blank!!!
+  { provide: AuthService, useValue: autoSpyObj(AuthService) },
 ];
 
 // tslint:disable-next-line: no-any

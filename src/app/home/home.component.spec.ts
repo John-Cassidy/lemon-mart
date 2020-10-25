@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InMemoryAuthService } from '../auth/auth.inmemory.service';
@@ -13,7 +14,7 @@ describe('HomeComponent', () => {
     await TestBed.configureTestingModule({
       imports: [commonTestingModules],
       providers: [{ provide: AuthService, useClass: InMemoryAuthService }],
-      declarations: [HomeComponent],
+      declarations: [HomeComponent, MockNavComponent],
     }).compileComponents();
   });
 
@@ -27,3 +28,9 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+@Component({
+  selector: 'app-login',
+  template: '',
+})
+class MockNavComponent {}

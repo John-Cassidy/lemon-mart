@@ -243,6 +243,9 @@ npx ng g interceptor auth/authHttp --lintFix --skipTests
 
 npx ng g c login -m app
 
+npx ng g s common/ui --lintFix
+npx ng g c common/simpleDialog -m app --flat --lintFix --skipTests -s -t
+
 ## OTHER EXAMPLES
 
 npx ng g i ICurrentWeather interface

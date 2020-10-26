@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { catchError, filter, tap } from 'rxjs/operators';
 import { SubSink } from 'subsink';
 
 import { AuthService } from '../auth/auth.service';
+import { UiService } from '../common/ui.service';
+import { EmailValidation, PasswordValidation } from '../common/validations';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +23,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
+    private uiService: UiService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -35,11 +38,8 @@ export class LoginComponent implements OnInit {
   }
   private buildLoginForm(): void {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [Validators.required, Validators.minLength(8), Validators.maxLength(50)],
-      ],
+      email: ['', EmailValidation],
+      password: ['', PasswordValidation],
     });
   }
 
@@ -55,6 +55,11 @@ export class LoginComponent implements OnInit {
       .pipe(
         filter(([authStatus, user]) => authStatus.isAuthenticated && user?._id !== ''),
         tap(([authStatus, user]) => {
+          this.uiService.showToast(`Welcome ${user.fullName}! Role: ${user.role}`);
+          // this.uiService.showDialog(
+          //   `Logged into LemonMart`,
+          //   `Welcome ${user.fullName}! <br/> Role: ${user.role}`
+          // );
           this.router.navigate([this.redirectUrl || '/manager']);
         })
       )

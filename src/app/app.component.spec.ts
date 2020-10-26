@@ -9,6 +9,7 @@ import {
   MatIconRegistryFake,
   MediaObserverFake,
   commonTestingModules,
+  commonTestingProviders,
 } from './common/common.testing';
 
 describe('AppComponent', () => {
@@ -22,6 +23,7 @@ describe('AppComponent', () => {
         { provide: MediaObserver, useClass: MediaObserverFake },
         { provide: MatIconRegistry, useClass: MatIconRegistryFake },
         { provide: DomSanitizer, useClass: DomSanitizerFake },
+        commonTestingProviders,
       ],
       declarations: [AppComponent],
     }).compileComponents();

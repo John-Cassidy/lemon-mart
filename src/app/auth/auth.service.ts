@@ -41,7 +41,7 @@ export abstract class AuthService extends CacheService implements IAuthService {
     map((user: IUser) => this.currentUser$.next(user)),
     catchError(transformError)
   );
-
+  // Example of caching technique
   // readonly authStatus$ = new BehaviorSubject<IAuthStatus>(
   //   this.getItem('authStatus') ?? defaultAuthStatus
   // );

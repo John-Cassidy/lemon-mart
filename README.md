@@ -246,6 +246,10 @@ npx ng g c login -m app
 npx ng g s common/ui --lintFix
 npx ng g c common/simpleDialog -m app --flat --lintFix --skipTests -s -t
 
+npx ng g c navigationMenu -m app --lintFix -s -t
+
+npx ng g s auth/authGuard --lintFix --skipTests
+
 ## OTHER EXAMPLES
 
 npx ng g i ICurrentWeather interface

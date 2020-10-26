@@ -5,6 +5,7 @@ import { combineLatest } from 'rxjs';
 import { catchError, filter, tap } from 'rxjs/operators';
 import { SubSink } from 'subsink';
 
+import { Role } from '../auth/auth.enum';
 import { AuthService } from '../auth/auth.service';
 import { UiService } from '../common/ui.service';
 import { EmailValidation, PasswordValidation } from '../common/validations';
@@ -60,9 +61,23 @@ export class LoginComponent implements OnInit {
           //   `Logged into LemonMart`,
           //   `Welcome ${user.fullName}! <br/> Role: ${user.role}`
           // );
-          this.router.navigate([this.redirectUrl || '/manager']);
+          this.router.navigate([
+            this.redirectUrl || this.homeRoutePerRole(user.role as Role),
+          ]);
         })
       )
       .subscribe();
+  }
+  homeRoutePerRole(role: Role): string {
+    switch (role) {
+      case Role.Cashier:
+        return '/pos';
+      case Role.Clerk:
+        return '/inventory';
+      case Role.Manager:
+        return '/manager';
+      default:
+        return '/user/profile';
+    }
   }
 }

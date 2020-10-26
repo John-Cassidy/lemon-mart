@@ -10,6 +10,7 @@ import { Observable, Subscription, of } from 'rxjs';
 
 import { AuthService } from '../auth/auth.service';
 import { MaterialModule } from '../material.module';
+import { UiService } from './ui.service';
 
 const FAKE_SVGS = {
   lemon: '<svg><path id="lemon" name="lemon"></path>path></svg>svg>',
@@ -67,6 +68,7 @@ export class DomSanitizerFake {
 // tslint:disable-next-line: no-any
 export const commonTestingProviders: any[] = [
   { provide: AuthService, useValue: autoSpyObj(AuthService) },
+  { provide: UiService, useValue: autoSpyObj(UiService) },
 ];
 
 // tslint:disable-next-line: no-any

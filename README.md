@@ -260,3 +260,27 @@ npx ng g s postalCode --project=local-weather-app --no-flat --lintFix --dry-run
 ## Wiki
 
 The wiki provides resources such as documentation, diagrams, and mockups.
+
+## Firebase
+
+app name: lemon-mart
+url: https://lemon-mart-ce379/firebaseapp.com
+
+### Install Firebse CLI
+
+npm install -g firebase-tools
+
+### log into firebase from CLI
+
+firebase login
+
+### setup Firebase project
+
+#### build/deploy from vs code
+
+- build:
+  npm run build:prod
+- deploy:
+  firebase deploy
+
+#### TODO: setup github workflow to deploy app to firebase

@@ -18,9 +18,10 @@ jobs:
           node-version: '12.x'
       - name: Install dependencies
         run: npm ci
-      - name: Build / Deploy
-      - run: 'npm run build:prod'
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Build
+        run: 'npm run build:prod'
+      - name: Deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_LEMON_MART_CE379 }}'

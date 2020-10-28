@@ -41,7 +41,10 @@
               "src/mstile-150x150.png",
               "src/site.webmanifest"
             ],
-            "styles": ["src/lemonmart-theme.scss", "src/styles.css"],
+            "styles": [
+              "src/lemonmart-theme.scss",
+              "src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -128,15 +131,24 @@
               "src/mstile-150x150.png",
               "src/site.webmanifest"
             ],
-            "styles": ["src/lemonmart-theme.scss", "src/styles.css"],
+            "styles": [
+              "src/lemonmart-theme.scss",
+              "src/styles.css"
+            ],
             "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "e2e": {
@@ -150,6 +162,10 @@
               "devServerTarget": "lemon-mart:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }

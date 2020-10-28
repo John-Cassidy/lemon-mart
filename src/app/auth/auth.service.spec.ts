@@ -1,9 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { autoSpyObj } from 'angular-unit-test-helper';
 
 import { commonTestingProviders } from '../common/common.testing';
-import { UiService } from '../common/ui.service';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {

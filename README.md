@@ -250,6 +250,8 @@ npx ng g c navigationMenu -m app --lintFix -s -t
 
 npx ng g s auth/authGuard --lintFix --skipTests
 
+npx ng g s auth/firebaseAuth --lintFix
+
 ## OTHER EXAMPLES
 
 npx ng g i ICurrentWeather interface
@@ -264,7 +266,7 @@ The wiki provides resources such as documentation, diagrams, and mockups.
 ## Firebase
 
 app name: lemon-mart
-url: https://lemon-mart-ce379/firebaseapp.com
+url: <https://lemon-mart-ce379.web.app>
 
 ### Install Firebse CLI
 
@@ -282,5 +284,14 @@ firebase login
   npm run build:prod
 - deploy:
   firebase deploy
+
+#### implement Firebase authentication
+
+npx ng add @angular/fire
+
+Follow Angular Fire's quickstart guid to finish setting up the library with your Angular project,
+which you can find linked from the readme file on GiHub at <https://github.com/angular/angularfire>
+
+- https://github.com/angular/angularfire/blob/master/docs/install-and-setup.md
 
 #### TODO: setup github workflow to deploy app to firebase

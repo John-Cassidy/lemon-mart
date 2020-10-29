@@ -30,7 +30,7 @@ jobs:
       - name: create environment variables
         run: npm run config -- --environment=prod
       - name: Build
-        run: npm run build:ci
+        run: npm run build:prod
       - name: Archive build
         # if: success()
         uses: actions/upload-artifact@v1

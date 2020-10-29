@@ -8,7 +8,7 @@ on:
       - 'master'
 jobs:
   build:
-    name: Build and Test
+    name: Build and Deploy
     runs-on: ubuntu-latest
     env:
       authMode: ${{ secrets.AUTHMODE_FIREBASE }}
@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: deploy_dist
-          path: dist
+          path: dist/lemon-mart
   deploy:
     name: Deploy
     runs-on: ubuntu-latest

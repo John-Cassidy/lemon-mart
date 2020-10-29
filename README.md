@@ -278,6 +278,13 @@ firebase login
 
 ### setup Firebase project
 
+#### initialize project
+
+firebase init
+
+NOTE: if you get an error deploying through GitHub Actions, possible fix is to upgrade firebase-tools to v 8.13.1 or higher
+npm i -D firebase-tools
+
 #### build/deploy from vs code
 
 - build:

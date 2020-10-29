@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
       authMode: ${{ secrets.AUTHMODE_FIREBASE }}
-      firebase.ApiKey: ${{ secrets.FIREBASE_APIKEY }}
-      firebase.authDomain: ${{ secrets.FIREBASE_AUTHDOMAIN }}
-      firebase.databaseURL: ${{ secrets.FIREBASE_DATABASEURL }}
-      firebase.projectId: ${{ secrets.FIREBASE_PROJECTID }}
-      firebase.storageBucket: ${{ secrets.FIREBASE_STORAGEBUCKET }}
-      firebase.messagingSenderId: ${{ secrets.FIREBASE_MESSAGING_SENDERID }}
+      firebaseApiKey: ${{ secrets.FIREBASE_APIKEY }}
+      firebaseAuthDomain: ${{ secrets.FIREBASE_AUTHDOMAIN }}
+      firebaseDatabaseUrl: ${{ secrets.FIREBASE_DATABASEURL }}
+      firebaseProjectId: ${{ secrets.FIREBASE_PROJECTID }}
+      firebaseStorageBucket: ${{ secrets.FIREBASE_STORAGEBUCKET }}
+      firebaseMessagingSenderId: ${{ secrets.FIREBASE_MESSAGING_SENDERID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2

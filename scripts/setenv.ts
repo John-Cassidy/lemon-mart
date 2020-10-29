@@ -7,6 +7,7 @@ const environment = argv.environment;
 const isProduction = environment === 'prod';
 
 if (
+  !process.env.authMode ||
   !process.env.firebaseApiKey ||
   !process.env.firebaseAuthDomain ||
   !process.env.firebaseDatabaseUrl ||

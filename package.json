@@ -9,6 +9,7 @@
     "build": "ng build",
     "build:prod": "ng build --prod --sourceMap=false",
     "build:ci": "ng build --prod --sourceMap=false --base-href /lemon-mart/",
+    "build:docker": "npm run config -- --environment=prod && ng build --prod",
     "test:ci": "ng test --watch=false --code-coverage --source-map true",
     "test": "ng test",
     "lint": "run-p lint:ts lint:tsc",
@@ -19,7 +20,7 @@
     "lint:ts": "tslint --config tslint.json --project . -e \"**/{test,polyfills}.ts\"",
     "lint:ts:fix": "tslint --config tslint.json --fix --project . -e \"**/{test,polyfills}.ts\"",
     "lint:tsc": "tsc --noEmit --skipLibCheck",
-    "predocker:build": "npm run build",
+    "predocker:build": "npm run build:docker && ng test --watch=false",
     "docker:build": "cross-conf-env docker image build . -t $npm_package_config_imageRepo:$npm_package_version",
     "postdocker:build": "npm run docker:tag",
     "docker:tag": " cross-conf-env docker image tag $npm_package_config_imageRepo:$npm_package_version $npm_package_config_imageRepo:latest",
@@ -109,9 +110,9 @@
     }
   },
   "config": {
-    "imageRepo": "[namespace]/[repository]",
-    "imageName": "custom_app_name",
-    "imagePort": "3000",
+    "imageRepo": "jpcassidy/lemon-mart",
+    "imageName": "lemon-mart",
+    "imagePort": "8081",
     "internalContainerPort": "3000"
   }
 }

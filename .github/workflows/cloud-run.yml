@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: '12.x'
       - name: Setup gcloud CLI
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
           version: '290.0.1'
           project_id: ${{ secrets.GCLOUD_PROJECT }}

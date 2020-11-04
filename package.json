@@ -35,7 +35,13 @@
     "docker:taillogs": "echo Web Server Logs: && cross-conf-env docker logs -f $npm_package_config_imageName",
     "docker:open": "sleep 2 && cross-conf-env open-cli http://localhost:$npm_package_config_imagePort",
     "docker:debugmessage": "echo Docker Debug Completed Successfully! Hit Ctrl+C to terminate log tailing.",
-    "docker:debug": "run-s -cs docker:build docker:run docker:open docker:debugmessage docker:taillogs"
+    "docker:debug": "run-s -cs docker:build docker:run docker:open docker:debugmessage docker:taillogs",
+    "gcloud:setupdocker": "gcloud auth configure-docker",
+    "gcloud:build": "cross-conf-env docker image build -f integration.Dockerfile . -t gcr.io/$npm_package_gcloud_projectId/$npm_package_gcloud_appName:$npm_package_version",
+    "postgcloud:build": "npm run gcloud:tag",
+    "gcloud:tag": " cross-conf-env docker image tag gcr.io/$npm_package_gcloud_projectId/$npm_package_gcloud_appName:$npm_package_version gcr.io/$npm_package_gcloud_projectId/$npm_package_gcloud_appName:latest",
+    "gcloud:push": "docker push gcr.io/$npm_package_gcloud_projectId/$npm_package_gcloud_appName",
+    "gcloud:deploy": "gcloud run deploy $npm_package_gcloud_appName --quiet --image gcr.io/$npm_package_gcloud_projectId/$npm_package_gcloud_appName --platform managed --project $npm_package_gcloud_projectId --region us-east1"
   },
   "private": true,
   "dependencies": {
@@ -116,5 +122,9 @@
     "imageName": "lemon-mart",
     "imagePort": "8081",
     "internalContainerPort": "3000"
+  },
+  "gcloud": {
+    "projectId": "lemon-mart-ce379",
+    "appName": "lemon-mart"
   }
 }

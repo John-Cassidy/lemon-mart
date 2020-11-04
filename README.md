@@ -305,6 +305,25 @@ which you can find linked from the readme file on GiHub at <https://github.com/a
 
 see build-deploy-firebase.yml
 
-# Docker and setting up build,test,deploy to Google Cloud
+## Docker and setting up build,test,deploy to Google Cloud
 
 example - docker run -it duluca/minimal-node-build-env:lts-alpine /bin/bash
+
+## setup Google Cloud platform project
+
+install GCloud sdk
+install GCloud extensions
+setup GCloud to run in windows terminal using cmd.exe
+note: you can also run from VS Code terminal:
+
+~ cmd.exe /k "C:\Program Files (x86)\Google\Cloud SDK\cloud_env.bat"
+
+### create the project from browser
+
+### gcloud cli commands used during development
+
+gcloud -h
+gcloud -v
+gcloud config set project lemon-mart-ce379
+gcloud info
+gcloud projects describe lemon-mart-ce379

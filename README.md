@@ -301,4 +301,10 @@ which you can find linked from the readme file on GiHub at <https://github.com/a
 
 - https://github.com/angular/angularfire/blob/master/docs/install-and-setup.md
 
-#### TODO: setup github workflow to deploy app to firebase
+#### setup github workflow to deploy app to firebase
+
+see build-deploy-firebase.yml
+
+# Docker and setting up build,test,deploy to Google Cloud
+
+example - docker run -it duluca/minimal-node-build-env:lts-alpine /bin/bash

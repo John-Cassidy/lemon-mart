@@ -9,11 +9,10 @@ COPY . .
 # install dependencies and build
 RUN npm ci
 
-
 RUN npm run style:fix
 RUN npm run lint:fix
 
-RUN npm run build:docker
+RUN npm run build:prod
 
 FROM duluca/minimal-node-chromium:lts-alpine as tester
 

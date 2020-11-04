@@ -30,9 +30,13 @@ WORKDIR $TESTER_SRC_DIR
 RUN npm run test:prod
 # RUN npm run test:prod:e2e
 
-FROM duluca/minimal-nginx-web-server:1-alpine as webserver
+FROM duluca/minimal-node-web-server:lts-alpine
 
 ENV BUILDER_SRC_DIR=/usr/src
 
-COPY --from=builder $BUILDER_SRC_DIR/dist/lemon-mart /var/www
-CMD 'nginx'
+WORKDIR /usr/src/app
+
+COPY --from=builder $BUILDER_SRC_DIR/dist/lemon-mart public
+
+#Overriding default ENTRYPOINT because gcloud doesn't like dumb-init
+ENTRYPOINT [ "npm", "start" ]

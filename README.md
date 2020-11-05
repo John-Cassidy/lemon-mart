@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/John-Cassidy/lemon-mart/badge.svg)](https://coveralls.io/github/John-Cassidy/lemon-mart)
+
 # LemonMart
 
 This project was generated the following command:

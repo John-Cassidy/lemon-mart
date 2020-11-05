@@ -327,3 +327,18 @@ gcloud -v
 gcloud config set project lemon-mart-ce379
 gcloud info
 gcloud projects describe lemon-mart-ce379
+
+## Code coverage reports
+
+generate the code coverage report for our app
+npx ng test --browsers ChromiumNoSandbox --watch=false --code-coverage
+
+execute the following command to view code coverage file in browser
+npx http-server -c-l -o -p 9875 ./coverage
+
+### Code coverage in Github
+
+register your project at https://coveralls.io/
+copy repo token and store it as an environment variable namded COVERALLS_REPO_TOKEN
+create a new branch before you make any code changes
+update karma.conf.js so it stores code coverage results under the coverage folder

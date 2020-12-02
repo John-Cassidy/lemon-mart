@@ -6,6 +6,7 @@ import { AuthMode } from 'src/app/auth/auth.enum';
 
 export const environment = {
   production: false,
+  baseUrl: '<your-server-url>',
   authMode: AuthMode.InMemory,
   firebase: {
     apiKey: '<your-key>',

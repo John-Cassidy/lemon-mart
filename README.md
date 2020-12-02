@@ -344,3 +344,7 @@ register your project at https://coveralls.io/
 copy repo token and store it as an environment variable namded COVERALLS_REPO_TOKEN
 create a new branch before you make any code changes
 update karma.conf.js so it stores code coverage results under the coverage folder
+
+## ts-enum-util
+
+npm i ts-enum-util

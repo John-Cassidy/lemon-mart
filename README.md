@@ -254,6 +254,10 @@ npx ng g s auth/authGuard --lintFix --skipTests
 
 npx ng g s auth/firebaseAuth --lintFix
 
+## Advanced - Reusability, Routing, and Caching
+
+npx ng g s user/user/user --lintFix --skipTests
+
 ## OTHER EXAMPLES
 
 npx ng g i ICurrentWeather interface

@@ -280,6 +280,11 @@ firebase login
 
 ### setup Firebase project
 
+### after every Angular Evergreen upgrade npm packages deprecate firebase back to this version
+
+npm i firebase@^7.13.1
+npm i -D firebase-tools@^8.14.1
+
 #### initialize project
 
 firebase init

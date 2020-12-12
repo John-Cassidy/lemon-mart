@@ -10,13 +10,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppMaterialModule } from './app.material.module';
 import { AuthHttpInterceptor } from './auth/auth-http.interceptor';
 import { authFactory } from './auth/auth.factory';
 import { AuthService } from './auth/auth.service';
 import { SimpleDialogComponent } from './common/simple-dialog.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { MaterialModule } from './material.module';
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -33,7 +33,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    AppMaterialModule,
     FlexLayoutModule,
     HttpClientModule,
     FormsModule,

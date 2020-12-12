@@ -257,6 +257,8 @@ npx ng g s auth/firebaseAuth --lintFix
 ## Advanced - Reusability, Routing, and Caching
 
 npx ng g s user/user/user --lintFix --skipTests
+npx ng g m user/userMaterial --flat -m user
+npx ng g directive user-controls/field-error/fieldError --skip-import=true
 
 ## OTHER EXAMPLES
 

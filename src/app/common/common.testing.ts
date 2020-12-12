@@ -8,8 +8,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { autoSpyObj } from 'angular-unit-test-helper';
 import { Observable, Subscription, of } from 'rxjs';
 
+import { AppMaterialModule } from '../app.material.module';
 import { AuthService } from '../auth/auth.service';
-import { MaterialModule } from '../material.module';
 import { UiService } from './ui.service';
 
 const FAKE_SVGS = {
@@ -74,7 +74,7 @@ export const commonTestingProviders: any[] = [
 // tslint:disable-next-line: no-any
 export const commonTestingModules: any[] = [
   ReactiveFormsModule,
-  MaterialModule,
+  AppMaterialModule,
   NoopAnimationsModule,
   HttpClientTestingModule,
   RouterTestingModule,

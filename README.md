@@ -261,12 +261,14 @@ npx ng g m user/userMaterial --flat -m user
 npx ng g directive user-controls/field-error/fieldError --skip-import=true
 npx ng g m user-controls/field-error/fieldError --flat -m user --dry-run
 
+npx ng g c user/view-user/viewUser --flat -m user -s -t --dry-run
+
 ## OTHER EXAMPLES
 
 npx ng g i ICurrentWeather interface
 npx ng g s weather --flat false
 npx ng g c citySearch -m app --dry-run
-npx ng g s postalCode --project=local-weather-app --no-flat --lintFix --dry-run
+npx ng g s postalCode --project=local-weather-app --no-flat --lintFix
 
 ## Wiki
 

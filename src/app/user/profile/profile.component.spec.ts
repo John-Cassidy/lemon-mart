@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
   ObservablePropertyStrategy,
   autoSpyObj,
@@ -13,6 +13,7 @@ import {
 import { FieldErrorModule } from '../../user-controls/field-error/field-error.module';
 import { UserMaterialModule } from '../user-material.module';
 import { User } from '../user/user';
+import { ViewUserComponent } from '../view-user/view-user.component';
 import { ProfileComponent } from './profile.component';
 
 describe('ProfileComponent', () => {
@@ -20,33 +21,35 @@ describe('ProfileComponent', () => {
   let fixture: ComponentFixture<ProfileComponent>;
   let authServiceMock: jasmine.SpyObj<AuthService>;
 
-  beforeEach(async () => {
-    const authServiceSpy = autoSpyObj(
-      AuthService,
-      ['currentUser$', 'authStatus$'],
-      ObservablePropertyStrategy.BehaviorSubject
-    );
-    await TestBed.configureTestingModule({
-      imports: commonTestingModules.concat([FieldErrorModule, UserMaterialModule]),
-      providers: commonTestingProviders.concat({
-        provide: AuthService,
-        useValue: authServiceSpy,
-      }),
-      declarations: [ProfileComponent],
-    }).compileComponents();
-  });
+  beforeEach(
+    waitForAsync(() => {
+      const authServiceSpy = autoSpyObj(
+        AuthService,
+        ['currentUser$', 'authStatus$'],
+        ObservablePropertyStrategy.BehaviorSubject
+      );
 
-  beforeEach(() => {
-    authServiceMock = injectSpy(AuthService);
+      TestBed.configureTestingModule({
+        providers: commonTestingProviders.concat({
+          provide: AuthService,
+          useValue: authServiceSpy,
+        }),
+        imports: commonTestingModules.concat([UserMaterialModule, FieldErrorModule]),
+        declarations: [ProfileComponent, ViewUserComponent],
+      }).compileComponents();
 
-    fixture = TestBed.createComponent(ProfileComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+      authServiceMock = injectSpy(AuthService);
+
+      fixture = TestBed.createComponent(ProfileComponent);
+      component = fixture.debugElement.componentInstance;
+    })
+  );
 
   it('should create', () => {
     authServiceMock.currentUser$.next(new User());
     authServiceMock.authStatus$.next(defaultAuthStatus);
+
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 });

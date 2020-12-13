@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, startWith, tap } from 'rxjs/operators';
 import { Role } from 'src/app/auth/auth.enum';
 import { AuthService } from 'src/app/auth/auth.service';
+import { UiService } from 'src/app/common/ui.service';
 import {
   EmailValidation,
   OneCharValidation,
@@ -12,10 +13,12 @@ import {
   USAPhoneNumberValidation,
   USAZipCodeValidation,
 } from 'src/app/common/validations';
+import { SubSink } from 'subsink';
 import { $enum } from 'ts-enum-util';
 
 import { ErrorSets } from '../../user-controls/field-error/field-error.directive';
-import { IPhone, IUser, PhoneType } from '../user/user';
+import { IName, IPhone, IUser, PhoneType } from '../user/user';
+import { UserService } from '../user/user.service';
 import { IUSState, USStateFilter } from './data';
 
 @Component({
@@ -30,8 +33,16 @@ export class ProfileComponent implements OnInit {
   formGroup!: FormGroup;
   states$: Observable<IUSState[]> | undefined;
   userError = '';
-  currentUserId: string | undefined;
+  currentUserId!: string;
   ErrorSets = ErrorSets;
+
+  readonly nameInitialData$ = new BehaviorSubject<IName>({
+    first: '',
+    middle: '',
+    last: '',
+  });
+
+  private subs = new SubSink();
 
   now = new Date();
   minDate = new Date(
@@ -54,8 +65,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    // private uiService: UiService,
-    // private userService: UserService,
+    private uiservice: UiService,
+    private userservice: UserService,
     private authService: AuthService
   ) {}
 
@@ -117,6 +128,19 @@ export class ProfileComponent implements OnInit {
       );
     }
   }
+
+  async save(form: FormGroup): Promise<void> {
+    this.subs.add(
+      this.userservice.updateUser(this.currentUserId, form.value).subscribe(
+        (res: IUser) => {
+          this.formGroup.patchValue(res);
+          this.uiservice.showToast('Updated user');
+        },
+        (err: string) => (this.userError = err)
+      )
+    );
+  }
+
   // tslint:disable-next-line: no-any
   buildPhoneArray(phones: IPhone[]): FormArray {
     const groups: FormArray = this.formBuilder.array([]);

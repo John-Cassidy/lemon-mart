@@ -11,35 +11,20 @@
           <mat-form-field appearance="outline" fxFlex="40%">
             <mat-label>First Name</mat-label>
             <input matInput aria-label="First Name" formControlName="first" #name />
-            <mat-error *ngIf="formGroup.get('name.first')?.hasError('required')">
-              First Name is required
-            </mat-error>
-            <mat-error *ngIf="formGroup.get('name.first')?.hasError('minLength')">
-              Must be at least 2 characters
-            </mat-error>
-            <mat-error *ngIf="formGroup.get('name.first')?.hasError('maxLength')">
-              Can't exceed 50 characters
-            </mat-error>
+            <mat-error [input]="name" [group]="formGroup.get('name')"
+              [appFieldError]="ErrorSets.RequiredText"></mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" fxFlex="20%">
             <input matInput placeholder="MI" aria-label="Middle Initial"
-              formControlName="middle">
-            <mat-error *ngIf="formGroup.get('name.middle')?.invalid">
-              Only initial
-            </mat-error>
+              formControlName="middle" #mi />
+            <mat-error [input]="mi" [group]="formGroup.get('name')"
+              [appFieldError]="{error: 'invalid', message: 'Only initial'}"></mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" fxFlex="40%">
             <input matInput placeholder="Last Name" aria-label="Last Name"
-              formControlName="last">
-            <mat-error *ngIf="formGroup.get('name.last')?.hasError('required')">
-              Last Name is required
-            </mat-error>
-            <mat-error *ngIf="formGroup.get('name.last')?.hasError('minLength')">
-              Must be at least 2 characters
-            </mat-error>
-            <mat-error *ngIf="formGroup.get('name.last')?.hasError('maxLength')">
-              Can't exceed 50 characters
-            </mat-error>
+              formControlName="last" #last />
+            <mat-error [input]="last" [group]="formGroup.get('name')"
+              [appFieldError]="ErrorSets.RequiredText"></mat-error>
           </mat-form-field>
         </div>
       </div>

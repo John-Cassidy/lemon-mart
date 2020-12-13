@@ -19,6 +19,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NavigationMenuComponent } from './navigation-menu/navigation-menu.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { FieldErrorModule } from './user-controls/field-error/field-error.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     BrowserAnimationsModule,
     AppMaterialModule,
     FlexLayoutModule,
+    FieldErrorModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

@@ -259,6 +259,7 @@ npx ng g s auth/firebaseAuth --lintFix
 npx ng g s user/user/user --lintFix --skipTests
 npx ng g m user/userMaterial --flat -m user
 npx ng g directive user-controls/field-error/fieldError --skip-import=true
+npx ng g m user-controls/field-error/fieldError --flat -m user --dry-run
 
 ## OTHER EXAMPLES
 

@@ -14,6 +14,7 @@ import {
 } from 'src/app/common/validations';
 import { $enum } from 'ts-enum-util';
 
+import { ErrorSets } from '../../user-controls/field-error/field-error.directive';
 import { IPhone, IUser, PhoneType } from '../user/user';
 import { IUSState, USStateFilter } from './data';
 
@@ -30,6 +31,7 @@ export class ProfileComponent implements OnInit {
   states$: Observable<IUSState[]> | undefined;
   userError = '';
   currentUserId: string | undefined;
+  ErrorSets = ErrorSets;
 
   constructor(
     private formBuilder: FormBuilder,

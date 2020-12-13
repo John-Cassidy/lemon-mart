@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
@@ -15,7 +15,7 @@ import { EmailValidation, PasswordValidation } from '../common/validations';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
   public loginForm!: FormGroup;
   public loginError = '';
@@ -36,6 +36,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.authService.logout();
     this.buildLoginForm();
+  }
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
   private buildLoginForm(): void {
     this.loginForm = this.formBuilder.group({

@@ -4,7 +4,7 @@ import { commonTestingModules, commonTestingProviders } from '../common/common.t
 import { FieldErrorModule } from '../user-controls/field-error/field-error.module';
 import { LoginComponent } from './login.component';
 
-+describe('LoginComponent', () => {
+describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 

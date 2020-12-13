@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { filter, map, startWith, tap } from 'rxjs/operators';
 import { Role } from 'src/app/auth/auth.enum';
@@ -32,6 +32,25 @@ export class ProfileComponent implements OnInit {
   userError = '';
   currentUserId: string | undefined;
   ErrorSets = ErrorSets;
+
+  now = new Date();
+  minDate = new Date(
+    this.now.getFullYear() - 100,
+    this.now.getMonth(),
+    this.now.getDate()
+  );
+
+  get dateOfBirth(): Date {
+    return this.formGroup.get('dateOfBirth')?.value || this.now;
+  }
+
+  get age(): number {
+    return this.now.getFullYear() - this.dateOfBirth.getFullYear();
+  }
+
+  get phonesArray(): FormArray {
+    return this.formGroup.get('phones') as FormArray;
+  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -86,7 +105,7 @@ export class ProfileComponent implements OnInit {
         state: [user?.address?.city || '', RequiredTextValidation],
         zip: [user?.address?.zip || '', USAZipCodeValidation],
       }),
-      phones: this.formBuilder.array(this.buildPhoneArray(user?.phones || [])),
+      phones: this.buildPhoneArray(user?.phones || []),
     });
 
     const state = this.formGroup.get('address.state');
@@ -99,8 +118,8 @@ export class ProfileComponent implements OnInit {
     }
   }
   // tslint:disable-next-line: no-any
-  buildPhoneArray(phones: IPhone[]): any[] {
-    const groups = [];
+  buildPhoneArray(phones: IPhone[]): FormArray {
+    const groups: FormArray = this.formBuilder.array([]);
 
     if (phones?.length === 0) {
       groups.push(this.buildPhoneFormControl(1));
@@ -112,11 +131,19 @@ export class ProfileComponent implements OnInit {
     return groups;
   }
   // tslint:disable-next-line: no-any
-  buildPhoneFormControl(id: number, type?: string, phoneNumber?: string): any {
+  buildPhoneFormControl(id: number, type?: string, phoneNumber?: string): FormGroup {
     return this.formBuilder.group({
       id: [id],
       type: [type || '', Validators.required],
       digits: [phoneNumber || '', USAPhoneNumberValidation],
     });
+  }
+
+  addPhone(): void {
+    this.phonesArray.push(this.buildPhoneFormControl(this.phonesArray.value.length + 1));
+  }
+
+  convertTypeToPhoneType(type: string): PhoneType {
+    return PhoneType[$enum(PhoneType).asKeyOrThrow(type)];
   }
 }

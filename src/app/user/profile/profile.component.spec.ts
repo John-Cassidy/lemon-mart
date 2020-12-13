@@ -11,6 +11,7 @@ import {
   commonTestingProviders,
 } from '../../common/common.testing';
 import { FieldErrorModule } from '../../user-controls/field-error/field-error.module';
+import { UserMaterialModule } from '../user-material.module';
 import { User } from '../user/user';
 import { ProfileComponent } from './profile.component';
 
@@ -26,7 +27,7 @@ describe('ProfileComponent', () => {
       ObservablePropertyStrategy.BehaviorSubject
     );
     await TestBed.configureTestingModule({
-      imports: commonTestingModules.concat([FieldErrorModule]),
+      imports: commonTestingModules.concat([FieldErrorModule, UserMaterialModule]),
       providers: commonTestingProviders.concat({
         provide: AuthService,
         useValue: authServiceSpy,

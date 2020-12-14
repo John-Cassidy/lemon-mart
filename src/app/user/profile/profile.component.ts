@@ -31,6 +31,9 @@ export class ProfileComponent implements OnInit {
   PhoneType = PhoneType;
   PhoneTypes = $enum(PhoneType).getKeys();
   formGroup!: FormGroup;
+  // tslint:disable-next-line: no-any
+  initialValues: any;
+
   states$: Observable<IUSState[]> | undefined;
   userError = '';
   currentUserId!: string;
@@ -87,6 +90,10 @@ export class ProfileComponent implements OnInit {
     return this.authService.authStatus$.value?.userRole;
   }
 
+  public setForm() {
+    this.formGroup.reset(this.initialValues);
+  }
+
   buildForm(user?: IUser): void {
     this.formGroup = this.formBuilder.group({
       email: [
@@ -127,6 +134,8 @@ export class ProfileComponent implements OnInit {
         map((value) => USStateFilter(value))
       );
     }
+
+    this.initialValues = this.formGroup.value;
   }
 
   async save(form: FormGroup): Promise<void> {

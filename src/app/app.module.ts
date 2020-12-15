@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +22,9 @@ import { NavigationMenuComponent } from './navigation-menu/navigation-menu.compo
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FieldErrorModule } from './user-controls/field-error/field-error.module';
 
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
+  showMaskTyped: true,
+};
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +44,7 @@ import { FieldErrorModule } from './user-controls/field-error/field-error.module
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxMaskModule.forRoot(options),
     AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [

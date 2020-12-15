@@ -63,6 +63,7 @@
     "fake-jwt-sign": "^1.1.1",
     "firebase": "^7.13.1",
     "jwt-decode": "^3.0.0",
+    "ngx-mask": "^11.1.4",
     "rxjs": "~6.6.3",
     "subsink": "^1.0.1",
     "ts-enum-util": "^4.0.2",

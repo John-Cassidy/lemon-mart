@@ -203,6 +203,11 @@ npm i -D @types/jwt-decode
 
 npm i fake-jwt-sign
 
+## Input Masking
+
+install the ngx-mask library. makes it really easy to implement input masking in Angular
+npm i ngx-mask
+
 ## Commands run during development to create
 
 generate modules based on roles functionality:

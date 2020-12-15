@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, startWith, tap } from 'rxjs/operators';
 import { Role } from 'src/app/auth/auth.enum';
 import { AuthService } from 'src/app/auth/auth.service';
+import { BaseFormComponent } from 'src/app/common/base-form.class';
 import { UiService } from 'src/app/common/ui.service';
 import {
   EmailValidation,
-  OneCharValidation,
   OptionalTextValidation,
   RequiredTextValidation,
   USAPhoneNumberValidation,
@@ -26,18 +26,21 @@ import { IUSState, USStateFilter } from './data';
   templateUrl: './profile.component.html',
   styles: [],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent
+  extends BaseFormComponent<IUser>
+  implements OnInit, OnDestroy {
   Role = Role;
   PhoneType = PhoneType;
   PhoneTypes = $enum(PhoneType).getKeys();
-  formGroup!: FormGroup;
+
   // tslint:disable-next-line: no-any
   initialValues: any;
 
-  states$: Observable<IUSState[]> | undefined;
-  userError = '';
   currentUserId!: string;
   ErrorSets = ErrorSets;
+
+  states$: Observable<IUSState[]> | undefined;
+  userError = '';
 
   readonly nameInitialData$ = new BehaviorSubject<IName>({
     first: '',
@@ -66,16 +69,25 @@ export class ProfileComponent implements OnInit {
     return this.formGroup.get('phones') as FormArray;
   }
 
+  private get currentUserRole(): Role {
+    return this.authService.authStatus$.value?.userRole;
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private uiservice: UiService,
     private userservice: UserService,
     private authService: AuthService
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.buildForm();
-    this.authService.currentUser$
+    this.formGroup = this.buildForm();
+
+    this.initialValues = this.formGroup.value;
+
+    this.subs.sink = this.authService.currentUser$
       .pipe(
         filter((user) => user !== null),
         tap((user) => {
@@ -85,17 +97,25 @@ export class ProfileComponent implements OnInit {
       )
       .subscribe();
   }
-
-  private get currentUserRole(): Role {
-    return this.authService.authStatus$.value?.userRole;
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+    this.deregisterAllForms();
   }
-
-  public setForm() {
+  patchUser(user: IUser): void {
+    if (user) {
+      this.currentUserId = user._id;
+      this.patchUpdateData(user);
+      this.nameInitialData$.next(user.name);
+    }
+  }
+  public setForm(): void {
     this.formGroup.reset(this.initialValues);
   }
 
-  buildForm(user?: IUser): void {
-    this.formGroup = this.formBuilder.group({
+  buildForm(initialData?: IUser): FormGroup {
+    const user = initialData;
+    this.currentUserId = user?._id || '';
+    const form = this.formBuilder.group({
       email: [
         {
           value: user?.email || '',
@@ -103,11 +123,7 @@ export class ProfileComponent implements OnInit {
         },
         EmailValidation,
       ],
-      name: this.formBuilder.group({
-        first: [user?.name?.first || '', RequiredTextValidation],
-        middle: [user?.name?.middle || '', OneCharValidation],
-        last: [user?.name?.last || '', RequiredTextValidation],
-      }),
+      name: null,
       role: [
         {
           value: user?.role || '',
@@ -126,16 +142,12 @@ export class ProfileComponent implements OnInit {
       phones: this.buildPhoneArray(user?.phones || []),
     });
 
-    const state = this.formGroup.get('address.state');
+    this.states$ = form.get('address.state')?.valueChanges.pipe(
+      startWith(''),
+      map((value) => USStateFilter(value))
+    );
 
-    if (state != null) {
-      this.states$ = state.valueChanges.pipe(
-        startWith(''),
-        map((value) => USStateFilter(value))
-      );
-    }
-
-    this.initialValues = this.formGroup.value;
+    return form;
   }
 
   async save(form: FormGroup): Promise<void> {

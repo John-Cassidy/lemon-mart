@@ -262,6 +262,8 @@ npx ng g directive user-controls/field-error/fieldError --skip-import=true
 npx ng g m user-controls/field-error/fieldError --flat -m user --dry-run
 
 npx ng g c user/view-user/viewUser --flat -m user -s -t --dry-run
+npx ng g class common/baseForm.class --dry-run
+npx ng g c user/name-input/nameInput --flat -m user -s -t
 
 ## OTHER EXAMPLES
 

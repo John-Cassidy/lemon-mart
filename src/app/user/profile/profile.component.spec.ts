@@ -11,6 +11,7 @@ import {
   commonTestingProviders,
 } from '../../common/common.testing';
 import { FieldErrorModule } from '../../user-controls/field-error/field-error.module';
+import { NameInputComponent } from '../name-input/name-input.component';
 import { UserMaterialModule } from '../user-material.module';
 import { User } from '../user/user';
 import { ViewUserComponent } from '../view-user/view-user.component';
@@ -35,7 +36,7 @@ describe('ProfileComponent', () => {
           useValue: authServiceSpy,
         }),
         imports: commonTestingModules.concat([UserMaterialModule, FieldErrorModule]),
-        declarations: [ProfileComponent, ViewUserComponent],
+        declarations: [ProfileComponent, NameInputComponent, ViewUserComponent],
       }).compileComponents();
 
       authServiceMock = injectSpy(AuthService);

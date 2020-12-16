@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, of } from 'rxjs';
 import { filter, map, startWith, tap } from 'rxjs/operators';
 import { Role } from 'src/app/auth/auth.enum';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -17,7 +17,7 @@ import { SubSink } from 'subsink';
 import { $enum } from 'ts-enum-util';
 
 import { ErrorSets } from '../../user-controls/field-error/field-error.directive';
-import { IName, IPhone, IUser, PhoneType } from '../user/user';
+import { IName, IPhone, IUser, PhoneType, User } from '../user/user';
 import { UserService } from '../user/user.service';
 import { IUSState, USStateFilter } from './data';
 
@@ -32,9 +32,6 @@ export class ProfileComponent
   Role = Role;
   PhoneType = PhoneType;
   PhoneTypes = $enum(PhoneType).getKeys();
-
-  // tslint:disable-next-line: no-any
-  // initialValues: any;
 
   currentUserId!: string;
   ErrorSets = ErrorSets;
@@ -77,7 +74,8 @@ export class ProfileComponent
     private formBuilder: FormBuilder,
     private uiservice: UiService,
     private userservice: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private uiService: UiService
   ) {
     super();
   }
@@ -85,18 +83,23 @@ export class ProfileComponent
   ngOnInit(): void {
     this.formGroup = this.buildForm();
 
-    // this.initialValues = this.formGroup.value;
-
-    this.subs.sink = this.authService.currentUser$
+    this.subs.sink = combineLatest([this.loadFromCache(), this.authService.currentUser$])
       .pipe(
-        filter((user) => user !== null),
-        tap((user) => {
-          this.currentUserId = user._id;
-          // this.buildForm(user);
-          this.patchUser(user);
-        })
+        filter(([cacheUser, currentUser]) => cacheUser != null || currentUser != null),
+        tap(([cacheUser, currentUser]) => this.patchUser(cacheUser || currentUser))
       )
       .subscribe();
+
+    // this.subs.sink = this.authService.currentUser$
+    //   .pipe(
+    //     filter((user) => user !== null),
+    //     tap((user) => {
+    //       this.currentUserId = user._id;
+    //       // this.buildForm(user);
+    //       this.patchUser(user);
+    //     })
+    //   )
+    //   .subscribe();
   }
   ngOnDestroy(): void {
     this.subs.unsubscribe();
@@ -108,9 +111,6 @@ export class ProfileComponent
       this.patchUpdateData(user);
       this.nameInitialData$.next(user.name);
     }
-  }
-  public setForm(): void {
-    // this.formGroup.reset(this.initialValues);
   }
 
   buildForm(initialData?: IUser): FormGroup {
@@ -191,5 +191,29 @@ export class ProfileComponent
 
   convertTypeToPhoneType(type: string): PhoneType {
     return PhoneType[$enum(PhoneType).asKeyOrThrow(type)];
+  }
+
+  private loadFromCache(): Observable<User | null> {
+    let user = null;
+
+    try {
+      const draftUser = localStorage.getItem('draft-user');
+
+      if (draftUser != null) {
+        user = User.Build(JSON.parse(draftUser));
+      }
+
+      if (user) {
+        this.uiService.showToast('Loaded data from cache');
+      }
+    } catch (err) {
+      localStorage.removeItem('draft-user');
+    }
+
+    return of(user);
+  }
+
+  clearCache(): void {
+    localStorage.removeItem('draft-user');
   }
 }

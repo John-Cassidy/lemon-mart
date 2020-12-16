@@ -273,6 +273,7 @@ npx ng g c user/name-input/nameInput --flat -m user -s -t
 ## Advanced Recipes - Master/Detail, Data Tables, and NgRX - Route Guards & Auxiliary Routes
 
 npx ng g class user/user/userResolve --lintFix --skipTests --dry-run
+npx ng g m sharedComponents --flat -m user --dry-run
 
 ## OTHER EXAMPLES
 

@@ -21,7 +21,7 @@ export class UserService extends CacheService implements IUserService {
   constructor(private httpClient: HttpClient, private authService: AuthService) {
     super();
   }
-  getUser(id: string): Observable<IUser> {
+  getUser(id: string | null): Observable<IUser> {
     if (id === null) {
       return throwError('User id is not set');
     }

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject, Observable, combineLatest, of } from 'rxjs';
 import { filter, map, startWith, tap } from 'rxjs/operators';
 import { Role } from 'src/app/auth/auth.enum';
@@ -75,7 +76,8 @@ export class ProfileComponent
     private uiservice: UiService,
     private userservice: UserService,
     private authService: AuthService,
-    private uiService: UiService
+    private uiService: UiService,
+    private route: ActivatedRoute
   ) {
     super();
   }
@@ -83,23 +85,19 @@ export class ProfileComponent
   ngOnInit(): void {
     this.formGroup = this.buildForm();
 
-    this.subs.sink = combineLatest([this.loadFromCache(), this.authService.currentUser$])
-      .pipe(
-        filter(([cacheUser, currentUser]) => cacheUser != null || currentUser != null),
-        tap(([cacheUser, currentUser]) => this.patchUser(cacheUser || currentUser))
-      )
-      .subscribe();
-
-    // this.subs.sink = this.authService.currentUser$
-    //   .pipe(
-    //     filter((user) => user !== null),
-    //     tap((user) => {
-    //       this.currentUserId = user._id;
-    //       // this.buildForm(user);
-    //       this.patchUser(user);
-    //     })
-    //   )
-    //   .subscribe();
+    if (this.route.snapshot.data.user) {
+      this.patchUser(this.route.snapshot.data.user);
+    } else {
+      this.subs.sink = combineLatest([
+        this.loadFromCache(),
+        this.authService.currentUser$,
+      ])
+        .pipe(
+          filter(([cacheUser, currentUser]) => cacheUser != null || currentUser != null),
+          tap(([cacheUser, currentUser]) => this.patchUser(cacheUser || currentUser))
+        )
+        .subscribe();
+    }
   }
   ngOnDestroy(): void {
     this.subs.unsubscribe();

@@ -270,6 +270,10 @@ npx ng g c user/view-user/viewUser --flat -m user -s -t --dry-run
 npx ng g class common/baseForm.class --dry-run
 npx ng g c user/name-input/nameInput --flat -m user -s -t
 
+## Advanced Recipes - Master/Detail, Data Tables, and NgRX - Route Guards & Auxiliary Routes
+
+npx ng g class user/user/userResolve --lintFix --skipTests --dry-run
+
 ## OTHER EXAMPLES
 
 npx ng g i ICurrentWeather interface

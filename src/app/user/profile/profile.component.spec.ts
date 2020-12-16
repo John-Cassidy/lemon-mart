@@ -4,6 +4,7 @@ import {
   autoSpyObj,
   injectSpy,
 } from 'angular-unit-test-helper';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { AuthService, defaultAuthStatus } from 'src/app/auth/auth.service';
 
 import {
@@ -16,6 +17,10 @@ import { UserMaterialModule } from '../user-material.module';
 import { User } from '../user/user';
 import { ViewUserComponent } from '../view-user/view-user.component';
 import { ProfileComponent } from './profile.component';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = {
+  showMaskTyped: true,
+};
 
 describe('ProfileComponent', () => {
   let component: ProfileComponent;
@@ -35,7 +40,11 @@ describe('ProfileComponent', () => {
           provide: AuthService,
           useValue: authServiceSpy,
         }),
-        imports: commonTestingModules.concat([UserMaterialModule, FieldErrorModule]),
+        imports: commonTestingModules.concat([
+          UserMaterialModule,
+          FieldErrorModule,
+          NgxMaskModule.forRoot(options),
+        ]),
         declarations: [ProfileComponent, NameInputComponent, ViewUserComponent],
       }).compileComponents();
 

@@ -34,7 +34,7 @@ export class ProfileComponent
   PhoneTypes = $enum(PhoneType).getKeys();
 
   // tslint:disable-next-line: no-any
-  initialValues: any;
+  // initialValues: any;
 
   currentUserId!: string;
   ErrorSets = ErrorSets;
@@ -85,14 +85,15 @@ export class ProfileComponent
   ngOnInit(): void {
     this.formGroup = this.buildForm();
 
-    this.initialValues = this.formGroup.value;
+    // this.initialValues = this.formGroup.value;
 
     this.subs.sink = this.authService.currentUser$
       .pipe(
         filter((user) => user !== null),
         tap((user) => {
           this.currentUserId = user._id;
-          this.buildForm(user);
+          // this.buildForm(user);
+          this.patchUser(user);
         })
       )
       .subscribe();
@@ -109,7 +110,7 @@ export class ProfileComponent
     }
   }
   public setForm(): void {
-    this.formGroup.reset(this.initialValues);
+    // this.formGroup.reset(this.initialValues);
   }
 
   buildForm(initialData?: IUser): FormGroup {

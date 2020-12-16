@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { catchError, filter, tap } from 'rxjs/operators';
 import { SubSink } from 'subsink';
-
 import { Role } from '../auth/auth.enum';
 import { AuthService } from '../auth/auth.service';
 import { UiService } from '../common/ui.service';
@@ -20,6 +19,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   public loginForm!: FormGroup;
   public loginError = '';
   public redirectUrl!: string;
+  // roles = Object.keys(Role);
+  // authMode = environment.authMode;
+  // AuthMode = AuthMode;
 
   constructor(
     private formBuilder: FormBuilder,

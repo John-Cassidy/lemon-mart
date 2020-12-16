@@ -275,6 +275,8 @@ npx ng g c user/name-input/nameInput --flat -m user -s -t
 npx ng g class user/user/userResolve --lintFix --skipTests --dry-run
 npx ng g m sharedComponents --flat -m user --dry-run
 
+npx ng g c manager/userTable --lintFix -m manager --dry-run
+
 ## OTHER EXAMPLES
 
 npx ng g i ICurrentWeather interface

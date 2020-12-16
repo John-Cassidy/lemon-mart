@@ -3,10 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../auth/auth-guard.service';
 import { Role } from '../auth/auth.enum';
+import { UserResolve } from '../user/user/user.resolve';
+import { ViewUserComponent } from '../user/view-user/view-user.component';
 import { ManagerHomeComponent } from './manager-home/manager-home.component';
 import { ManagerComponent } from './manager.component';
 import { ReceiptLookupComponent } from './receipt-lookup/receipt-lookup.component';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { UserTableComponent } from './user-table/user-table.component';
 
 const routes: Routes = [
   {
@@ -18,19 +21,38 @@ const routes: Routes = [
         path: 'home',
         component: ManagerHomeComponent,
         canActivate: [AuthGuard],
-        data: { expectedRole: Role.Manager },
+        data: {
+          expectedRole: Role.Manager,
+        },
       },
       {
         path: 'users',
         component: UserManagementComponent,
+        children: [
+          { path: '', component: UserTableComponent, outlet: 'master' },
+          {
+            path: 'user',
+            component: ViewUserComponent,
+            outlet: 'detail',
+            resolve: {
+              user: UserResolve,
+            },
+          },
+          { path: 'detail', component: ViewUserComponent, outlet: 'detail' },
+        ],
         canActivate: [AuthGuard],
-        data: { expectedRole: Role.Manager },
+        canActivateChild: [AuthGuard],
+        data: {
+          expectedRole: Role.Manager,
+        },
       },
       {
         path: 'receipts',
         component: ReceiptLookupComponent,
         canActivate: [AuthGuard],
-        data: { expectedRole: Role.Manager },
+        data: {
+          expectedRole: Role.Manager,
+        },
       },
     ],
   },

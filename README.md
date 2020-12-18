@@ -277,6 +277,22 @@ npx ng g m sharedComponents --flat -m user --dry-run
 
 npx ng g c manager/userTable --lintFix -m manager --dry-run
 
+## NgRx Data - a configuration-based framework and convention-based sibling of NgRx
+
+NgRx Data automates the creation of stores, effects, actions, reducers, dispatches, and selectors.
+When applications are CRUD action based, then NgRx Data can achieve the same result as NgRx with a lot less code needing to be written.
+
+Add NgRx Data to project with the following commands:
+
+npx ng add @ngrx/store --minimal
+npx ng add @ngrx/effects --minimal
+npx ng add @ngrx/entity
+npx ng add @ngrx/data
+
+NOTE: If you want to console.log NgRx actions for debugging or imnstrumentation during runtime refier to Appendix A in book.
+
+npx ng g s user/user/userEntity --lintFix --skipTests
+
 ## OTHER EXAMPLES
 
 npx ng g i ICurrentWeather interface

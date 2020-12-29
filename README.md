@@ -9,7 +9,7 @@ npx @angular/cli new lemon-mart --routing --string
 
 ## VSCode exensions and settings
 
-I've added an extensions.json file in .vscode folder that suggests what exensions to install in VSCode to improve your developlment experience.
+I've added an extensions.json file in .vscode folder that suggests what extensions to install in VSCode to improve your development experience.
 To install these exensions in your project, if they are not already:
 
 npm i -D dev-norms

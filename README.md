@@ -7,6 +7,10 @@ This project was generated the following command:
 npx @angular/cli new lemon-mart --routing --string
 (select CSS as the stylesheet format)
 
+## Suggested Angular Application Structure
+
+[Article on Angular Project Structure](https://medium.com/god-dev-blog/building-an-angular-application-structure-ef4cee9da934)
+
 ## VSCode exensions and settings
 
 I've added an extensions.json file in .vscode folder that suggests what extensions to install in VSCode to improve your development experience.
